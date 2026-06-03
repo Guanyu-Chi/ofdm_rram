@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Cadence/Spectre generated outputs
+*.ahdlSimDB/
+*.raw/
+*.psf/
+psf/
+*.srf
+*.log
+*.mt0
+*.measure
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/

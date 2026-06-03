@@ -1,0 +1,53 @@
+experiment:
+  name: ofdm_rram
+  scope: circuit_level_read_path_validation
+  matrix_seed: 2026
+
+crossbar:
+  rows: 128
+  cols: 128
+  ron_ohm: 1000
+  roff_ohm: 1000000
+  binary_probability_ron: 0.5
+  cell_model: programmed_read_state_1t1r_like
+  selector:
+    technology_nm: 45
+    type: minimum_size_nmos
+    width_m: null
+    length_m: null
+    note: "Exact minimum-size dimensions are process/PDK dependent and require user confirmation."
+
+ofdm_qam:
+  n: 4
+  samples_per_wordline: 8
+  carriers_hz: [250000000, 500000000, 750000000, 1000000000]
+  gray_mapping:
+    "00": -3
+    "01": -1
+    "10": 3
+    "11": 1
+  voltage_levels_v: [-0.3, -0.1, 0.3, 0.1]
+  odd_sample_path: cos_i
+  even_sample_path: sin_q
+
+transient:
+  stop_s: 8.0e-8
+  minimum_cycles_at_lowest_carrier: 20
+  integration_start_s: 0
+  integration_stop_s: 8.0e-8
+  latency_definition: full_transient_window
+
+verification:
+  demodulator_scope: verification_demodulator
+  path_template: bpf_to_cos_and_sin_demod_to_lpf_integration_decision
+  structural_checks:
+    rows: 128
+    cols: 128
+    cells: 16384
+    carriers: 4
+    demod_paths_per_carrier: 2
+  
+performance:
+  reported_scope: crossbar_level_simulated_or_estimated_power
+  full_chip_power: not_reported
+  peripheral_overhead: not_included

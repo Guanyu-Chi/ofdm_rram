@@ -1,0 +1,8 @@
+metric,value,unit,scope,status
+latency,8.000e-08,s,full transient/read window,configured
+operations_per_window,131072,ops,128 columns x 128 rows x 4 carriers x multiply-add factor 2,derived
+throughput,1.638400e+12,ops/s,crossbar read window,derived
+average_crossbar_power,4.181515e-01,W,resistor-level read-state estimate,estimated
+energy_per_window,3.345212e-08,J,resistor-level read-state estimate,estimated
+energy_per_op,2.552194e-13,J/op,resistor-level read-state estimate,estimated
+tops_per_w,3.918198e+00,TOPS/W,resistor-level read-state estimate,estimated

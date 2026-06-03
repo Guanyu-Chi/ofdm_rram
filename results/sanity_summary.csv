@@ -1,0 +1,4 @@
+case,errors,warnings,notices,elapsed_wall_clock
+8x8,0,0,2,8.57 s
+32x32,0,0,2,33.8 s
+128x128,0,1,2,449 s (7m 28.8s)

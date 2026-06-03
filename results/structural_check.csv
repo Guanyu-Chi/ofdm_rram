@@ -1,0 +1,16 @@
+check,expected,actual,status,file
+wordline_sources,128,128,pass,netlist/clean_128x128_crossbar.scs
+bitline_loads,128,128,pass,netlist/clean_128x128_crossbar.scs
+rram_cells,16384,16384,pass,netlist/clean_128x128_crossbar.scs
+selector_devices,16384,16384,pass,netlist/clean_128x128_crossbar.scs
+bpf_paths_all_bl,512,512,pass,tb/tb_ofdm_qam_128x128.scs
+i_verification_demodulators,8192,8192,pass,tb/tb_ofdm_qam_128x128.scs
+q_verification_demodulators,8192,8192,pass,tb/tb_ofdm_qam_128x128.scs
+i_phase_window_relays,8192,8192,pass,tb/tb_ofdm_qam_128x128.scs
+q_phase_window_relays,8192,8192,pass,tb/tb_ofdm_qam_128x128.scs
+i_integrator_outputs,512,512,pass,tb/tb_ofdm_qam_128x128.scs
+q_integrator_outputs,512,512,pass,tb/tb_ofdm_qam_128x128.scs
+reference_frequency_250000000,2,2,pass,tb/tb_ofdm_qam_128x128.scs
+reference_frequency_500000000,2,2,pass,tb/tb_ofdm_qam_128x128.scs
+reference_frequency_750000000,2,2,pass,tb/tb_ofdm_qam_128x128.scs
+reference_frequency_1000000000,2,2,pass,tb/tb_ofdm_qam_128x128.scs
