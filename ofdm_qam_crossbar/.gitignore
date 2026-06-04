@@ -1,0 +1,8 @@
+data/
+results/
+*.pth.tar
+*.pt
+*.pth
+__pycache__/
+*.pyc
+.vscode/

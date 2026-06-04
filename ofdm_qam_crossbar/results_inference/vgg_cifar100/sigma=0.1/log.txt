@@ -1,0 +1,11 @@
+2024-11-17 02:23:19 - INFO - saving to ./results_inference/vgg_cifar100/sigma=0.1
+2024-11-17 02:23:19 - DEBUG - run arguments: Namespace(batch_size=256, dataset='cifar100', epochs=2500, evaluate='/nas/ei/share/TUEIEDAscratch/ge86duw/BinaryNet.pytorch/results/vgg_cifar100/model_best.pth.tar', gpus='2', input_size=None, lr=0.1, model='vgg_cifar10_with_freq_drift', model_config='', momentum=0.9, num_class=100, optimizer='SGD', print_freq=10, results_dir='./results_inference/', resume='', save='vgg_cifar100/sigma=0.1', sigma=0.1, start_epoch=0, type='torch.cuda.FloatTensor', weight_decay=0.0001, workers=8)
+2024-11-17 02:23:20 - INFO - creating model vgg_cifar10_with_freq_drift
+2024-11-17 02:23:20 - INFO - created model with configuration: {'input_size': None, 'dataset': 'cifar100', 'sigma': 0.1, 'num_classes': 100}
+2024-11-17 02:23:20 - INFO - loaded checkpoint '/nas/ei/share/TUEIEDAscratch/ge86duw/BinaryNet.pytorch/results/vgg_cifar100/model_best.pth.tar' (epoch 50)
+2024-11-17 02:23:20 - INFO - number of parameters: 14121956
+2024-11-17 02:23:27 - INFO - EVALUATING - Epoch: [0][1/40]	Time 5.875 (5.875)	Data 0.253 (0.253)	Loss 1.1722 (1.1722)	Prec@1 67.969 (67.969)	Prec@5 89.062 (89.062)
+2024-11-17 02:24:09 - INFO - EVALUATING - Epoch: [0][10/40]	Time 4.695 (4.829)	Data 0.001 (0.026)	Loss 1.1396 (1.1992)	Prec@1 66.016 (66.484)	Prec@5 91.406 (90.156)
+2024-11-17 02:24:56 - INFO - EVALUATING - Epoch: [0][20/40]	Time 4.734 (4.770)	Data 0.000 (0.013)	Loss 1.1995 (1.2163)	Prec@1 64.844 (65.137)	Prec@5 91.016 (89.961)
+2024-11-17 02:25:44 - INFO - EVALUATING - Epoch: [0][30/40]	Time 4.611 (4.784)	Data 0.000 (0.009)	Loss 1.1948 (1.1960)	Prec@1 67.578 (65.599)	Prec@5 90.625 (90.221)
+2024-11-17 02:26:26 - INFO - EVALUATING - Epoch: [0][40/40]	Time 0.311 (4.623)	Data 0.000 (0.007)	Loss 0.9783 (1.1825)	Prec@1 68.750 (66.070)	Prec@5 87.500 (90.430)

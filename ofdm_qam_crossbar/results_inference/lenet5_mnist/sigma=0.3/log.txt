@@ -1,0 +1,11 @@
+2024-11-17 03:10:38 - INFO - saving to ./results_inference/./lenet5_mnist/sigma=0.3
+2024-11-17 03:10:38 - DEBUG - run arguments: Namespace(batch_size=256, dataset='mnist', epochs=2500, evaluate='/nas/ei/share/TUEIEDAscratch/ge86duw/BinaryNet.pytorch/results/lenet5_mnist/model_best.pth.tar', gpus='0', input_size=None, lr=0.1, model='lenet5_with_freq_drift', model_config='', momentum=0.9, num_class=10, optimizer='SGD', print_freq=10, results_dir='./results_inference/', resume='', save='./lenet5_mnist/sigma=0.3', sigma=0.3, start_epoch=0, type='torch.cuda.FloatTensor', weight_decay=0.0001, workers=8)
+2024-11-17 03:10:38 - INFO - creating model lenet5_with_freq_drift
+2024-11-17 03:10:38 - INFO - created model with configuration: {'input_size': None, 'dataset': 'mnist', 'sigma': 0.3, 'num_classes': 10}
+2024-11-17 03:10:38 - INFO - loaded checkpoint '/nas/ei/share/TUEIEDAscratch/ge86duw/BinaryNet.pytorch/results/lenet5_mnist/model_best.pth.tar' (epoch 46)
+2024-11-17 03:10:38 - INFO - number of parameters: 44878
+2024-11-17 03:10:39 - INFO - EVALUATING - Epoch: [0][1/40]	Time 0.833 (0.833)	Data 0.256 (0.256)	Loss 0.1220 (0.1220)	Prec@1 97.266 (97.266)	Prec@5 100.000 (100.000)
+2024-11-17 03:10:40 - INFO - EVALUATING - Epoch: [0][10/40]	Time 0.052 (0.136)	Data 0.000 (0.026)	Loss 0.1931 (0.1449)	Prec@1 94.141 (95.234)	Prec@5 100.000 (99.883)
+2024-11-17 03:10:40 - INFO - EVALUATING - Epoch: [0][20/40]	Time 0.055 (0.096)	Data 0.000 (0.013)	Loss 0.0893 (0.1333)	Prec@1 97.266 (95.742)	Prec@5 100.000 (99.941)
+2024-11-17 03:10:41 - INFO - EVALUATING - Epoch: [0][30/40]	Time 0.056 (0.083)	Data 0.000 (0.009)	Loss 0.0460 (0.1071)	Prec@1 98.438 (96.667)	Prec@5 100.000 (99.935)
+2024-11-17 03:10:42 - INFO - EVALUATING - Epoch: [0][40/40]	Time 0.117 (0.079)	Data 0.000 (0.007)	Loss 0.0157 (0.0952)	Prec@1 100.000 (97.040)	Prec@5 100.000 (99.950)

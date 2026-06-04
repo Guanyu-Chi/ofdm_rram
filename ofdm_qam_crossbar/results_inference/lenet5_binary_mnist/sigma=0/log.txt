@@ -1,0 +1,7 @@
+2025-02-10 18:19:26 - INFO - saving to ./results_inference/./lenet5_binary_mnist/sigma=0
+2025-02-10 18:19:26 - DEBUG - run arguments: Namespace(batch_size=256, dataset='mnist', epochs=2500, evaluate='/nas/ei/share/TUEIEDAscratch/ge86duw/BNN_OFDM_QAM/results/lenet5_binary_mnist/model_best.pth.tar', gpus='0', input_size=None, lr=0.1, model='lenet5_binary', model_config='', momentum=0.9, num_class=10, optimizer='SGD', print_freq=70, results_dir='./results_inference/', resume='', save='./lenet5_binary_mnist/sigma=0', sigma=0, start_epoch=0, type='torch.cuda.FloatTensor', weight_decay=0.0001, workers=8)
+2025-02-10 18:19:26 - INFO - creating model lenet5_binary
+2025-02-10 18:19:26 - INFO - created model with configuration: {'input_size': None, 'dataset': 'mnist', 'sigma': 0, 'num_classes': 10}
+2025-02-10 18:19:26 - INFO - loaded checkpoint '/nas/ei/share/TUEIEDAscratch/ge86duw/BNN_OFDM_QAM/results/lenet5_binary_mnist/model_best.pth.tar' (epoch 27)
+2025-02-10 18:19:26 - INFO - number of parameters: 50014
+2025-02-10 18:19:27 - INFO - EVALUATING - Epoch: [0][1/40]	Time 0.645 (0.645)	Data 0.211 (0.211)	Loss 1.0547 (1.0547)	Prec@1 75.000 (75.000)	Prec@5 98.438 (98.438)

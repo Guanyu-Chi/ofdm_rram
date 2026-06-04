@@ -1,0 +1,10 @@
+cd /nas/ei/share/TUEIEDAscratch/ge86duw/BNN_OFDM_QAM/
+# python3 main_binary.py --dataset 'cifar10' --model 'vgg_cifar10' --evaluate "/nas/ei/share/TUEIEDAscratch/ge86duw/BNN_OFDM_QAM/results/vgg_cifar10/model_best.pth.tar"  --save "vgg_cifar10"
+python3 main_binary.py --dataset 'cifar100' --model 'vgg_cifar10_with_mismatch_carrier_v2' --evaluate "/nas/ei/share/TUEIEDAscratch/ge86duw/BNN_OFDM_QAM/results/vgg_cifar100/model_best.pth.tar"  --save "vgg_cifar100_mismatch/sigma0p000" --num_class 100 --sigma 0.00
+python3 main_binary.py --dataset 'cifar100' --model 'vgg_cifar10_with_mismatch_carrier_v2' --evaluate "/nas/ei/share/TUEIEDAscratch/ge86duw/BNN_OFDM_QAM/results/vgg_cifar100/model_best.pth.tar"  --save "vgg_cifar100_mismatch/sigma0p005" --num_class 100 --sigma 0.005
+python3 main_binary.py --dataset 'cifar100' --model 'vgg_cifar10_with_mismatch_carrier_v2' --evaluate "/nas/ei/share/TUEIEDAscratch/ge86duw/BNN_OFDM_QAM/results/vgg_cifar100/model_best.pth.tar"  --save "vgg_cifar100_mismatch/sigma0p010" --num_class 100 --sigma 0.010
+python3 main_binary.py --dataset 'cifar100' --model 'vgg_cifar10_with_mismatch_carrier_v2' --evaluate "/nas/ei/share/TUEIEDAscratch/ge86duw/BNN_OFDM_QAM/results/vgg_cifar100/model_best.pth.tar"  --save "vgg_cifar100_mismatch/sigma0p015" --num_class 100 --sigma 0.015
+python3 main_binary.py --dataset 'cifar100' --model 'vgg_cifar10_with_mismatch_carrier_v2' --evaluate "/nas/ei/share/TUEIEDAscratch/ge86duw/BNN_OFDM_QAM/results/vgg_cifar100/model_best.pth.tar"  --save "vgg_cifar100_mismatch/sigma0p020" --num_class 100 --sigma 0.020
+python3 main_binary.py --dataset 'cifar100' --model 'vgg_cifar10_with_mismatch_carrier_v2' --evaluate "/nas/ei/share/TUEIEDAscratch/ge86duw/BNN_OFDM_QAM/results/vgg_cifar100/model_best.pth.tar"  --save "vgg_cifar100_mismatch/sigma0p025" --num_class 100 --sigma 0.025
+python3 main_binary.py --dataset 'cifar100' --model 'vgg_cifar10_with_mismatch_carrier_v2' --evaluate "/nas/ei/share/TUEIEDAscratch/ge86duw/BNN_OFDM_QAM/results/vgg_cifar100/model_best.pth.tar"  --save "vgg_cifar100_mismatch/sigma0p030" --num_class 100 --sigma 0.030
+
