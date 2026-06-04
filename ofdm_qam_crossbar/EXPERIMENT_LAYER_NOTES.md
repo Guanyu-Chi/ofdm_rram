@@ -4,16 +4,15 @@ This directory contains the algorithm-level inference-accuracy evaluation code
 used to study carrier-domain non-idealities in neural-network inference.
 
 The repository also contains a separate circuit-level 128 x 128 RRAM crossbar
-verification flow under `experiments/iccd2026_ofdm_rram/`. The two parts are
-connected by the OFDM-based readout concept, but they evaluate different layers
-of the design.
-
-你现在论文里两种都写到了，但对应的是两个不同实验层级：
-
-1. accuracy / inference evaluation 写的是普通模型
-2. circuit-level 128×128 RRAM crossbar 写的是 binary conductance / binary weight
-
-也就是说，论文目前不是一个完全统一的 “binary neural network mapped to RRAM” 故事.
+verification flow under `experiments/iccd2026_ofdm_rram/`. These two flows are
+connected by the same OFDM-based readout concept, but they intentionally target
+different abstraction layers. The inference-accuracy flow uses ordinary PyTorch
+CNN models to evaluate the numerical impact of carrier-domain demodulation
+non-idealities. The circuit-level flow uses a generated binary Ron/Roff
+conductance matrix to verify the 128 x 128 programmed read-state crossbar and
+its reusable readout testbench. The combined result is therefore complementary:
+algorithm-level inference robustness on one side, and circuit-level readout
+verification on the other.
 
 ## Accuracy / Inference Evaluation
 
@@ -35,8 +34,9 @@ Relevant files:
   result files.
 
 In this layer, the convolution output is treated as the ideal crossbar MVM
-readout result. The OFDM/QAM demodulation mismatch model then perturbs that
-output before the remaining neural-network layers continue inference.
+readout result. The OFDM carrier-domain demodulation mismatch model then
+perturbs that output before the remaining neural-network layers continue
+inference.
 
 ## Binary Model Code
 
