@@ -1,0 +1,4 @@
+Scale,Errors,Warnings,Elapsed Time (s),Source Log
+8x8,0,0,11.0,results/sanity_8x8/run.log
+32x32,0,0,33.8,results/sanity_32x32/run.log
+128x128,0,0,808.0,results/sim_run_zerowarn/run.log

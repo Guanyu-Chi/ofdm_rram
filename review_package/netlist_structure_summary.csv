@@ -1,0 +1,8 @@
+Item,Expected Count,Extracted Count,Evidence Pattern,Status
+Wordlines,128,128,VWL000-VWL127,PASS
+Bitlines,128,128,RBLLOAD000-RBLLOAD127,PASS
+RRAM cells,16384,16384,RRAM_rXXX_cXXX,PASS
+MOS selectors,16384,16384,MSEL_rXXX_cXXX,PASS
+Ron cells,extracted,8355,resistor r=1k,PASS
+Roff cells,extracted,8029,resistor r=1meg,PASS
+Bitline loads,128,128,RBLLOADXXX,PASS

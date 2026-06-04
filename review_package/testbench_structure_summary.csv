@@ -1,0 +1,8 @@
+Item,Expected Count,Extracted Count,Evidence Pattern,Status
+BPF paths,512,512,CBPF_cXXX_Y,PASS
+I demod VCVS segments,8192,8192,EMIXI_cXXX_Y_ZZ,PASS
+Q demod VCVS segments,8192,8192,EMIXQ_cXXX_Y_ZZ,PASS
+I integration outputs,512,512,CINTI_cXXX_Y,PASS
+Q integration outputs,512,512,CINTQ_cXXX_Y,PASS
+Saved I/Q output groups,512,512,save bpf/Icar/Qcar,PASS
+Transient window,80 ns,80 ns,tbtran tran stop=80n,PASS

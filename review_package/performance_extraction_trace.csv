@@ -1,0 +1,10 @@
+Metric,Value,Basis,Status
+Read window,80 ns,testbench transient/integration window,configured
+Array size,128 x 128,generated crossbar instance,configured
+Carrier count,4,configured carrier set,configured
+Operations per window,131072,128 rows x 128 columns x 4 carriers x multiply-add factor 2,derived
+Throughput,1.638400e+12 ops/s,operations per window divided by 80 ns,derived
+Average read-state power,4.181515e-01 W,sum of G_ij times mean squared read voltage,estimated
+Energy per window,3.345212e-08 J,average read-state power times 80 ns,estimated
+Energy per operation,2.552194e-13 J/op,energy per window divided by operations per window,estimated
+Read-state energy efficiency,3.918198 TOPS/W,throughput divided by average read-state power,estimated
