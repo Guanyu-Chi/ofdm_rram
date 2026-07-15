@@ -1,0 +1,4 @@
+category,separated_iq_bound,conventional_mixed_bound,unit,status,notes
+theoretical_worst_case,3.840000000000e-02,5.430580079513e-02,A,derived,all Ron worst case; conventional uses sqrt(I^2+Q^2) 16-QAM magnitude
+matrix_specific_ideal,3.496500000000e-03,3.531998372027e-03,A,derived_from_G_matrix,ideal conductance-domain MVM for seed 2026
+measured_matched_baseline,2.931014799601e-02,2.931091240850e-02,V,measured_from_separated_and_conventional_testbenches,"matched baseline uses same crossbar, BPF, phase-window verification demodulator, and 80 ns integration window"

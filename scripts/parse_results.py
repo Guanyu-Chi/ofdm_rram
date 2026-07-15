@@ -142,7 +142,7 @@ def main():
         writer.writerow(["max_abs_demod_output_v", f"{max(abs_err_raw) if abs_err_raw else 0:.12e}", "measured_from_Icar_Qcar_nodes"])
         writer.writerow(["max_gain_normalized_abs_error_a", f"{max(abs_err_norm) if abs_err_norm else 0:.12e}", "fit_gain_per_carrier_component"])
         writer.writerow(["mean_gain_normalized_abs_error_a", f"{sum(abs_err_norm)/len(abs_err_norm) if abs_err_norm else 0:.12e}", "fit_gain_per_carrier_component"])
-        writer.writerow(["note", "Icar/Qcar are circuit-generated verification-demodulator outputs. Gain-normalized error uses per-carrier/component least-squares gain and should be interpreted as a verification metric.", "interpretation_required"])
+        writer.writerow(["note", "Icar/Qcar are circuit-generated verification-demodulator outputs. Gain-normalized error uses per-carrier/component least-squares gain and is not an ADC claim.", "interpretation_required"])
 
     with DR.open("w", newline="") as f:
         writer = csv.writer(f)

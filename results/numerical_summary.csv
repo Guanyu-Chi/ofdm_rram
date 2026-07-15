@@ -1,0 +1,6 @@
+metric,value,status
+waveform_file,/nas/ei/share/TUEIEDAscratch/ge86duw/experiments/iccd2026_ofdm_rram/results/sim_run/psf/tbtran.tran.tran,measured_from_Icar_Qcar_nodes
+max_abs_demod_output_v,2.931014799601e-02,measured_from_Icar_Qcar_nodes
+max_gain_normalized_abs_error_a,1.045027267375e-02,fit_gain_per_carrier_component
+mean_gain_normalized_abs_error_a,5.009428083124e-03,fit_gain_per_carrier_component
+note,Icar/Qcar are circuit-generated verification-demodulator outputs. Gain-normalized error uses per-carrier/component least-squares gain and is not an ADC claim.,interpretation_required

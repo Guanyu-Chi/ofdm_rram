@@ -1,5 +1,5 @@
 experiment:
-  name: ofdm_rram
+  name: iccd2026_ofdm_rram
   scope: circuit_level_read_path_validation
   matrix_seed: 2026
 
@@ -15,7 +15,7 @@ crossbar:
     type: minimum_size_nmos
     width_m: null
     length_m: null
-    note: "Exact minimum-size dimensions are process/PDK dependent and require user confirmation."
+    note: "Exact minimum-size dimensions are process/Pdk dependent and require user confirmation."
 
 ofdm_qam:
   n: 4
@@ -46,8 +46,10 @@ verification:
     cells: 16384
     carriers: 4
     demod_paths_per_carrier: 2
-  
+  comparison_refs: [yin2020high, "9351816", ReAD2025]
+
 performance:
   reported_scope: crossbar_level_simulated_or_estimated_power
   full_chip_power: not_reported
-  peripheral_overhead: not_included
+  peripheral_overhead: estimated_or_discussed_separately
+  adc_claim_rule: "Report ADC-bit reduction only if separated I/Q dynamic range is lower than conventional mixed 16-QAM dynamic range."

@@ -1,0 +1,12 @@
+metric,value,unit,status,notes
+separated_measured_dynamic_range,2.931014799601e-02,V,measured,max abs over Icar/Qcar nodes
+conventional_mixed_measured_dynamic_range,2.931091240850e-02,V,measured,max sqrt(ConvIcar^2+ConvQcar^2) over matched baseline nodes
+measured_conventional_to_separated_ratio,1.000026080131e+00,ratio,derived,ratio > 1 means conventional baseline has larger measured range
+measured_continuous_bit_delta,3.762518457394e-05,bits,derived,log2(conventional/separated); one full ADC bit would require >= 1.0
+experimental_adc_reduction_status,not_supported,boolean,not_supported,requires >= 0.5 continuous-bit margin for meaningful experimental support in this script
+missing_separated_pairs,0,count,check,expected 0
+missing_conventional_pairs,0,count,check,expected 0
+carrier_250000000_ratio,1.000026080131e+00,ratio,derived,continuous_bit_delta=3.762518457394e-05
+carrier_500000000_ratio,1.000042895271e+00,ratio,derived,continuous_bit_delta=6.188346694749e-05
+carrier_750000000_ratio,1.000585333971e+00,ratio,derived,continuous_bit_delta=8.442113680597e-04
+carrier_1000000000_ratio,1.001905247530e+00,ratio,derived,continuous_bit_delta=2.746076015695e-03
