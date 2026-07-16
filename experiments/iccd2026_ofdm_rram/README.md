@@ -17,3 +17,13 @@ spectre experiments/iccd2026_ofdm_rram/tb/tb_ptm45_integrated_fourcarrier.scs +e
 ```
 
 The present clocked slicer is an interface study. Its low-signal limitation is documented in Stage 07; it is not a validated multi-bit converter.
+
+## Four-code DAC waveform reproduction
+
+The final MSB PMOS DAC cell is 450 nm wide and 90 nm long in `tb/tb_ptm45_integrated_fourcarrier.scs`. Run the four-code test with Spectre using `tb/tb_ptm45_dac2_fourcode_w450.scs`, then generate the publication waveform with:
+
+```bash
+python3 experiments/iccd2026_ofdm_rram/results/figures/plot_physical_dac_waveforms.py
+```
+
+The editable architecture source and derived assets are in `results/figures/`: `make_physical_architecture_ppt.py`, `physical_fourcarrier_architecture.pptx`, and `physical_fourcarrier_architecture.pdf`. Raw transient output is intentionally not versioned; stages 11–14 record the input netlists, window extraction method, numerical results, and limitations.

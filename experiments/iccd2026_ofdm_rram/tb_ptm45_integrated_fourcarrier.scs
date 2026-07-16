@@ -1,0 +1,207 @@
+simulator lang=spice
+.include "../models/ptm45/nmos_vtl_bsim4.inc"
+.include "../models/ptm45/pmos_vtl_bsim4.inc"
+simulator lang=spectre
+
+subckt inv45 (in out vdd)
+MP (out in vdd vdd) PMOS_VTL w=480n l=45n
+MN (out in 0 0) NMOS_VTL w=240n l=45n
+ends inv45
+
+subckt ring3 (out vdd)
+parameters cload=95f
+X0 (n2 out vdd) inv45
+X1 (out n1 vdd) inv45
+X2 (n1 n2 vdd) inv45
+C0 (out 0) capacitor c=cload ic=0.45
+C1 (n1 0) capacitor c=cload ic=0.65
+C2 (n2 0) capacitor c=cload ic=0.55
+ends ring3
+
+subckt qphase (loi qn qp vdd)
+parameters cphase=1p
+RQP (loi qrc) resistor r=1k
+CQP (qrc 0) capacitor c=cphase
+XQB (qrc qn vdd) inv45
+XINVQ (qn qp vdd) inv45
+ends qphase
+
+// Two-bit PMOS weighted-current DAC followed by a transistor LO switch.
+// b1/b0 are digital testbench inputs; no analog baseband source is used.
+subckt mod_dac2 (bl b1 b0 lon vdd)
+XIB0 (b0 b0b vdd) inv45
+XIB1 (b1 b1b vdd) inv45
+MNB (vb vb 0 0) NMOS_VTL w=180n l=90n
+MPB (vb vb vdd vdd) PMOS_VTL w=180n l=90n
+MCS0 (c0 vb vdd vdd) PMOS_VTL w=250n l=90n
+MCS1 (c1 vb vdd vdd) PMOS_VTL w=450n l=90n
+MS0 (nsum b0b c0 vdd) PMOS_VTL w=500n l=45n
+MS1 (nsum b1b c1 vdd) PMOS_VTL w=1u l=45n
+RLEAK (nsum vdd) resistor r=100k
+MLO (bl lon nsum vdd) PMOS_VTL w=1u l=45n
+ends mod_dac2
+
+subckt gilbert_demod (rfp rfn lop lon outp outn vb vdd)
+MTAIL (tail vb 0 0) NMOS_VTL w=600n l=90n
+MRFP (xp rfp tail 0) NMOS_VTL w=600n l=90n
+MRFN (xn rfn tail 0) NMOS_VTL w=600n l=90n
+MSW1 (outp lop xp 0) NMOS_VTL w=600n l=90n
+MSW2 (outn lon xp 0) NMOS_VTL w=600n l=90n
+MSW3 (outp lon xn 0) NMOS_VTL w=600n l=90n
+MSW4 (outn lop xn 0) NMOS_VTL w=600n l=90n
+RLP (vdd outp) resistor r=5k
+RLN (vdd outn) resistor r=5k
+CINTP (outp 0) capacitor c=2p
+CINTN (outn 0) capacitor c=2p
+ends gilbert_demod
+
+subckt sample_hold (in samp clki clkn vdd)
+MN (samp clki in 0) NMOS_VTL w=600n l=45n
+MP (samp clkn in vdd) PMOS_VTL w=1.2u l=45n
+CS (samp 0) capacitor c=100f
+ends sample_hold
+
+subckt dynamic_slicer (inp inn clke dtrue dcomp vdd)
+MPRP (xp clke vdd vdd) PMOS_VTL w=1.2u l=45n
+MPRN (xn clke vdd vdd) PMOS_VTL w=1.2u l=45n
+MIP (xp inp tail 0) NMOS_VTL w=1u l=90n
+MIN (xn inn tail 0) NMOS_VTL w=1u l=90n
+MT (tail clke 0 0) NMOS_VTL w=1u l=90n
+MLP (xp xn tail 0) NMOS_VTL w=1u l=45n
+MLN (xn xp tail 0) NMOS_VTL w=1u l=45n
+MCP (xp xn vdd vdd) PMOS_VTL w=1.2u l=45n
+MCN (xn xp vdd vdd) PMOS_VTL w=1.2u l=45n
+XBP (xp dtrue vdd) inv45
+XBN (xn dcomp vdd) inv45
+ends dynamic_slicer
+
+subckt mirror_slicer (inp inn bit vb vdd)
+MTAIL (tail vb 0 0) NMOS_VTL w=600n l=90n
+MINP (nref inp tail 0) NMOS_VTL w=1u l=90n
+MINN (pre inn tail 0) NMOS_VTL w=1u l=90n
+MREF (nref nref vdd vdd) PMOS_VTL w=600n l=90n
+MLOAD (pre nref vdd vdd) PMOS_VTL w=600n l=90n
+// Weak rail clamps keep the high-impedance mirror nodes inside the device-safe range
+// during sample-clock feedthrough; they are inactive in the nominal decision range.
+MCLPREF (nref nref vdd vdd) PMOS_VTL w=100n l=90n
+MCLNREF (nref nref 0 0) NMOS_VTL w=100n l=90n
+MCLPPRE (pre pre vdd vdd) PMOS_VTL w=100n l=90n
+MCLNPRE (pre pre 0 0) NMOS_VTL w=100n l=90n
+MP1 (b1 pre vdd vdd) PMOS_VTL w=650n l=45n
+MN1 (b1 pre 0 0) NMOS_VTL w=240n l=45n
+MP2 (b2 b1 vdd vdd) PMOS_VTL w=480n l=45n
+MN2 (b2 b1 0 0) NMOS_VTL w=240n l=45n
+MP3 (bit b2 vdd vdd) PMOS_VTL w=480n l=45n
+MN3 (bit b2 0 0) NMOS_VTL w=240n l=45n
+Cpre (pre 0) capacitor c=10f
+Cb1 (b1 0) capacitor c=10f
+Cb2 (b2 0) capacitor c=10f
+ends mirror_slicer
+
+parameters vdd=1.1
+VDD (vdd 0) vsource dc=vdd
+
+// Digital fixtures drive the physical two-bit current DAC on the first carrier.
+VDB2500 (db2500 0) vsource type=pwl wave=[0 0 35n 0 35.1n 1.1 80n 1.1]
+VDB2501 (db2501 0) vsource type=pwl wave=[0 1.1 35n 1.1 35.1n 0 80n 0]
+VDB5000 (db5000 0) vsource type=pwl wave=[0 1.1 35n 1.1 35.1n 0 80n 0]
+VDB5001 (db5001 0) vsource type=pwl wave=[0 0 35n 0 35.1n 1.1 80n 1.1]
+VDB7500 (db7500 0) vsource type=pwl wave=[0 0 35n 0 35.1n 1.1 80n 1.1]
+VDB7501 (db7501 0) vsource type=pwl wave=[0 0 35n 0 35.1n 1.1 80n 1.1]
+VDB1G0 (db1g0 0) vsource type=pwl wave=[0 1.1 35n 1.1 35.1n 0 80n 0]
+VDB1G1 (db1g1 0) vsource type=pwl wave=[0 1.1 35n 1.1 35.1n 0 80n 0]
+
+XLO250 (loi250p vdd) ring3 cload=380f
+XINV250 (loi250p loi250n vdd) inv45
+XQ250 (loi250p loq250n loq250p vdd) qphase cphase=4p
+XMOD250 (bl db2501 db2500 loi250n vdd) mod_dac2
+XLO500 (loi500p vdd) ring3 cload=190f
+XINV500 (loi500p loi500n vdd) inv45
+XQ500 (loi500p loq500n loq500p vdd) qphase cphase=2p
+XMOD500 (bl db5001 db5000 loi500n vdd) mod_dac2
+XLO750 (loi750p vdd) ring3 cload=127f
+XINV750 (loi750p loi750n vdd) inv45
+XQ750 (loi750p loq750n loq750p vdd) qphase cphase=1.333p
+XMOD750 (bl db7501 db7500 loi750n vdd) mod_dac2
+XLO1G (loi1gp vdd) ring3 cload=95f
+XINV1G (loi1gp loi1gn vdd) inv45
+XQ1G (loi1gp loq1gn loq1gp vdd) qphase cphase=1p
+XMOD1G (bl db1g1 db1g0 loi1gn vdd) mod_dac2
+
+// One physical bitline TIA receives the summed four-carrier current.
+RPB (vbp 0) resistor r=1.4k
+MPREF (vbp vbp vdd vdd) PMOS_VTL w=1u l=45n
+MPIN (tiaout vbp bl vdd) PMOS_VTL w=1u l=45n
+RTIA (tiaout 0) resistor r=5k
+CTIA (tiaout 0) capacitor c=10f
+RVCMH (vdd vcm) resistor r=20k
+RVCML (vcm 0) resistor r=20k
+CVCM (vcm 0) capacitor c=10p
+CRFP (tiaout rfp) capacitor c=100f
+RRFBIAS (rfp vcm) resistor r=50k
+RRFNBIAS (rfn vcm) resistor r=50k
+RNB (vdd vbn) resistor r=10k
+MNREF (vbn vbn 0 0) NMOS_VTL w=600n l=90n
+
+XI250 (rfp rfn loi250p loi250n i250p i250n vbn vdd) gilbert_demod
+XQ250D (rfp rfn loq250p loq250n q250p q250n vbn vdd) gilbert_demod
+XI500 (rfp rfn loi500p loi500n i500p i500n vbn vdd) gilbert_demod
+XQ500D (rfp rfn loq500p loq500n q500p q500n vbn vdd) gilbert_demod
+XI750 (rfp rfn loi750p loi750n i750p i750n vbn vdd) gilbert_demod
+XQ750D (rfp rfn loq750p loq750n q750p q750n vbn vdd) gilbert_demod
+XI1G (rfp rfn loi1gp loi1gn i1gp i1gn vbn vdd) gilbert_demod
+XQ1GD (rfp rfn loq1gp loq1gn q1gp q1gn vbn vdd) gilbert_demod
+
+VCLK (clki 0) vsource type=pulse val0=0 val1=1.1 delay=20n rise=20p fall=20p width=1n period=10n
+VCLKE (clke 0) vsource type=pulse val0=0 val1=1.1 delay=21.2n rise=20p fall=20p width=4n period=10n
+XCLKI (clki clkn vdd) inv45
+XCLKE (clke clkne vdd) inv45
+VCLKH (clkh 0) vsource type=pulse val0=0 val1=1.1 delay=24.00n rise=20p fall=20p width=1n period=10n
+XCLKH (clkh clkhn vdd) inv45
+
+XSI250P (i250p si250p clki clkn vdd) sample_hold
+XSI250N (i250n si250n clki clkn vdd) sample_hold
+XSQ250P (q250p sq250p clki clkn vdd) sample_hold
+XSQ250N (q250n sq250n clki clkn vdd) sample_hold
+XSI500P (i500p si500p clki clkn vdd) sample_hold
+XSI500N (i500n si500n clki clkn vdd) sample_hold
+XSQ500P (q500p sq500p clki clkn vdd) sample_hold
+XSQ500N (q500n sq500n clki clkn vdd) sample_hold
+XSI750P (i750p si750p clki clkn vdd) sample_hold
+XSI750N (i750n si750n clki clkn vdd) sample_hold
+XSQ750P (q750p sq750p clki clkn vdd) sample_hold
+XSQ750N (q750n sq750n clki clkn vdd) sample_hold
+XSI1GP (i1gp si1gp clki clkn vdd) sample_hold
+XSI1GN (i1gn si1gn clki clkn vdd) sample_hold
+XSQ1GP (q1gp sq1gp clki clkn vdd) sample_hold
+XSQ1GN (q1gn sq1gn clki clkn vdd) sample_hold
+
+XDI250 (si250p si250n clke di250t di250c vdd) dynamic_slicer
+XDQ250 (sq250p sq250n clke dq250t dq250c vdd) dynamic_slicer
+XDI500 (si500p si500n clke di500t di500c vdd) dynamic_slicer
+XDQ500 (sq500p sq500n clke dq500t dq500c vdd) dynamic_slicer
+XDI750 (si750p si750n clke di750t di750c vdd) dynamic_slicer
+XDQ750 (sq750p sq750n clke dq750t dq750c vdd) dynamic_slicer
+XDI1G (si1gp si1gn clke di1gt di1gc vdd) dynamic_slicer
+XDQ1G (sq1gp sq1gn clke dq1gt dq1gc vdd) dynamic_slicer
+
+XAI250 (si250p si250n abi250 vbn vdd) mirror_slicer
+XAQ250 (sq250p sq250n abq250 vbn vdd) mirror_slicer
+XAI500 (si500p si500n abi500 vbn vdd) mirror_slicer
+XAQ500 (sq500p sq500n abq500 vbn vdd) mirror_slicer
+XAI750 (si750p si750n abi750 vbn vdd) mirror_slicer
+XAQ750 (sq750p sq750n abq750 vbn vdd) mirror_slicer
+XAI1G (si1gp si1gn abi1g vbn vdd) mirror_slicer
+XAQ1G (sq1gp sq1gn abq1g vbn vdd) mirror_slicer
+
+XLDI250 (di250t dbi250 clkh clkhn vdd) sample_hold
+XLDQ250 (dq250t dbq250 clkh clkhn vdd) sample_hold
+XLDI500 (di500t dbi500 clkh clkhn vdd) sample_hold
+XLDQ500 (dq500t dbq500 clkh clkhn vdd) sample_hold
+XLDI750 (di750t dbi750 clkh clkhn vdd) sample_hold
+XLDQ750 (dq750t dbq750 clkh clkhn vdd) sample_hold
+XLDI1G (di1gt dbi1g clkh clkhn vdd) sample_hold
+XLDQ1G (dq1gt dbq1g clkh clkhn vdd) sample_hold
+
+tran tran stop=80n maxstep=1p skipdc=no
+save bl tiaout rfp rfn db2500 db2501 db5000 db5001 db7500 db7501 db1g0 db1g1 XMOD250.vb XMOD250.nsum XMOD500.nsum XMOD750.nsum XMOD1G.nsum clki clke i250p i250n q250p q250n i500p i500n q500p q500n i750p i750n q750p q750n i1gp i1gn q1gp q1gn di250t di250c dq250t dq250c di500t di500c dq500t dq500c di750t di750c dq750t dq750c di1gt di1gc dq1gt dq1gc dbi250 dbq250 dbi500 dbq500 dbi750 dbq750 dbi1g dbq1g abi250 abq250 abi500 abq500 abi750 abq750 abi1g abq1g
