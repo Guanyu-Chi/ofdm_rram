@@ -27,3 +27,5 @@ python3 experiments/iccd2026_ofdm_rram/results/figures/plot_physical_dac_wavefor
 ```
 
 The editable architecture source and derived assets are in `results/figures/`: `make_physical_architecture_ppt.py`, `physical_fourcarrier_architecture.pptx`, and `physical_fourcarrier_architecture.pdf`. Raw transient output is intentionally not versioned; stages 11–14 record the input netlists, window extraction method, numerical results, and limitations.
+
+The first manuscript workflow figure is generated from `results/figures/make_intro_workflow_ppt.py`; the editable PPTX and PDF/PNG exports are stored in the same directory.

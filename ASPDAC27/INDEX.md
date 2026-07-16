@@ -17,6 +17,10 @@ This directory records completed work as independent, time-stamped stages. Each 
 
 | 14 | complete: minimum stable observation window | 2026-07-16 16:05:00 | [Minimum stable observation window](stage_14_minimum_stable_observation_window.md) |
 
+| 15 | complete: LO frequency calibration | 2026-07-16 18:00:00 | [LO frequency calibration](stage_15_lo_frequency_calibration.md) |
+
+| 16 | complete: intro workflow figure | 2026-07-16 19:20:00 | [Intro workflow figure](stage_16_intro_workflow_figure.md) |
+
 ## Recording convention
 
 A stage is marked complete only after its output files and verification command are recorded. Estimates must be labeled as estimates and must identify their scaling basis.
