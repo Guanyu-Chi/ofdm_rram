@@ -44,3 +44,20 @@ This document lists the files selected for the standalone `ofdm_rram` project re
 ## Release Audit Policy
 
 The release candidate is checked for project-external tooling references before upload. No project-external workspace metadata should appear in the release candidate.
+
+## v5 Four-Channel Transistor-Chain Artifacts (added 2026-07-18)
+
+Final calibrated four-channel peripheral-chain experiment
+(carriers 250/500/750/1000 MHz, error <= 0.22%; see
+`experiments/iccd2026_ofdm_rram/results/figures/EXPERIMENT_SUMMARY.md`).
+
+- `experiments/iccd2026_ofdm_rram/tb/tb_ptm45_filteronly_{250,425,723,1229}.scs` — single-tone runs (differ only in DAC enable bits)
+- `experiments/iccd2026_ofdm_rram/tb/tb_ptm45_filteronly_4tone.scs` — four-tone run
+- `experiments/iccd2026_ofdm_rram/tb/tb_ptm45_filteronly_4tone_pwr.scs` — four-tone power run (adds `save VDD:p` only)
+- `experiments/iccd2026_ofdm_rram/tb/tb_ptm45_ringcal.scs` — 60 ns ring-oscillator calibration bench
+- `experiments/iccd2026_ofdm_rram/tb/tb_ptm45_filter_ac.scs` — in-situ AC response bench
+- `experiments/iccd2026_ofdm_rram/results/figures/*.py` — nutascii parsing, leakage matrix, ideal demodulation, Gilbert metrics, figure generation
+- `experiments/iccd2026_ofdm_rram/results/figures/*_v5.csv`, `oscillator_calibration.csv`, `power_4tone_v5.csv`, `filter_ac_response_final.csv`, `ideal_demod_4tone.csv` — result tables
+- `experiments/iccd2026_ofdm_rram/results/figures/ideal_demod_waveforms/baseband_stim*_v5.csv` — baseband integration traces
+- `experiments/iccd2026_ofdm_rram/results/figures/fig_*.png` — paper figures
+- Raw Spectre nutascii waveform dumps remain excluded (multi-hundred-MB; regenerate with the listed netlists and commands in `EXPERIMENT_SUMMARY.md`).
