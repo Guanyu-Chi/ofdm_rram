@@ -70,3 +70,9 @@ Final calibrated four-channel peripheral-chain experiment
 - `results/figures/hw_aware_network_eval.py`, `train_resnet20_mnist.py`, `make_hwacc_figure.py` — hardware-aware inference evaluation (LeNet5/ResNet20/VGG8 on MNIST/CIFAR-10/CIFAR-100)
 - `results/figures/hw_aware_network_accuracy.csv`, `fig_hwacc_networks.pdf/png`, `resnet20_mnist_model_best.pth.tar` — results and the in-work-trained ResNet20 checkpoint
 - `results/figures/mapped_layer_*.{py,csv}`, `performance_measured_v6.csv`, `power_4tone_v5.csv` — layer-level check, measured performance derivation, power
+
+## Manuscript-Current Figures and RRAM-Variation Study (added 2026-07-18)
+
+- `results/figures/cim_repro.{pdf,png}` + `make_cim_png_repro.py` — vectorized architecture figure (paper Fig. 3), supersedes `fig_cim_architecture.*`
+- `results/figures/fig_rram_variation.{pdf,png}` + `make_rram_variation_fig.py` — accuracy vs RRAM conductance-variation sigma (paper Discussion figure)
+- `results/figures/rram_variation_eval.py` + `rram_variation_accuracy.csv` — conductance-variation inference sweep (LeNet5/ResNet20/VGG8; device variation shown secondary to the carrier harmonic)
