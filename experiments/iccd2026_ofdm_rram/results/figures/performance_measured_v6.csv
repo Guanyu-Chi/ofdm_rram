@@ -1,0 +1,13 @@
+metric,value,basis
+peripheral_power_mw,14.43,"measured, RRAM-CIM netlist, 4-carrier steady state 160-180ns"
+idle_power_mw,13.58,"measured, DACs off, LOs running (filteronly bench)"
+first_decision_latency_ns,180,measured: 160 ns settling + 20 ns integration
+symbol_window_ns,20,"integer-cycle window, settled regime"
+energy_per_window_nj,0.289,"P*T, one BL chain"
+measured_gops_per_bl,0.40,"4 MACs x2ops / 20 ns, sensed column"
+measured_norm_gbops_per_bl,0.80,x2 activation bits x1 weight bit
+measured_array_gops,1.60,full 4x4 (16 MACs) per window
+measured_periph_tops_w,0.1109,4x4 array ops / measured peripheral power
+proj128_gops_per_bl,51.2,"projection: 128 rows x 4 carriers, same 20 ns window"
+proj128_norm_gbops_per_bl,102.4,x2 bits; methodology of prior comparison
+proj128_periph_tops_w,3.55,projected ops / measured per-chain power

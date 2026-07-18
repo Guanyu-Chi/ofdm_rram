@@ -1,0 +1,5 @@
+carrier,BL0,BL1,BL2,BL3,definition
+250,0.0,1.0,0.0,1.0,"binary conductance MVM, unit input per row"
+500,0.0,1.0,1.0,0.0,"binary conductance MVM, unit input per row"
+750,0.0,0.0,1.0,1.0,"binary conductance MVM, unit input per row"
+1g,1.0,0.0,1.0,0.0,"binary conductance MVM, unit input per row"
