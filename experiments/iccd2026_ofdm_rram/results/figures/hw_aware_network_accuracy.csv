@@ -1,0 +1,13 @@
+network,case,accuracy_percent,test_samples,eval_seconds
+lenet5_mnist,baseline,97.93,10000,1
+lenet5_mnist,hw_full_DH,73.19,10000,1
+lenet5_mnist,hw_cal_harmonic,91.77,10000,1
+resnet20_mnist,baseline,99.63,10000,2
+resnet20_mnist,hw_full_DH,26.42,10000,4
+resnet20_mnist,hw_cal_harmonic,39.04,10000,4
+vgg_cifar10,baseline,90.55,10000,17
+vgg_cifar10,hw_full_DH,49.79,10000,28
+vgg_cifar10,hw_cal_harmonic,69.42,10000,29
+vgg_cifar100,baseline,67.28,10000,17
+vgg_cifar100,hw_full_DH,27.89,10000,29
+vgg_cifar100,hw_cal_harmonic,42.17,10000,29

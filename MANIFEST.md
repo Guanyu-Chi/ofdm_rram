@@ -61,3 +61,12 @@ Final calibrated four-channel peripheral-chain experiment
 - `experiments/iccd2026_ofdm_rram/results/figures/ideal_demod_waveforms/baseband_stim*_v5.csv` — baseband integration traces
 - `experiments/iccd2026_ofdm_rram/results/figures/fig_*.png` — paper figures
 - Raw Spectre nutascii waveform dumps remain excluded (multi-hundred-MB; regenerate with the listed netlists and commands in `EXPERIMENT_SUMMARY.md`).
+
+## RRAM-CIM and Hardware-Aware Network Artifacts (added 2026-07-18)
+
+- `tb/tb_ptm45_rramcim_4x4{,_pwr}.scs` — programmed 4x4 1T1R crossbar driving the full v5 peripheral chain (power variant adds `save VDD:p`; measured 14.43 mW)
+- `results/figures/rram_*.csv` — programmed matrix, input vector, expected/measured MVM, normalized error
+- `results/figures/make_cim_{architecture,waveform}_fig.py` + `fig_cim_*.pdf/png` — paper architecture and end-to-end transient figures
+- `results/figures/hw_aware_network_eval.py`, `train_resnet20_mnist.py`, `make_hwacc_figure.py` — hardware-aware inference evaluation (LeNet5/ResNet20/VGG8 on MNIST/CIFAR-10/CIFAR-100)
+- `results/figures/hw_aware_network_accuracy.csv`, `fig_hwacc_networks.pdf/png`, `resnet20_mnist_model_best.pth.tar` — results and the in-work-trained ResNet20 checkpoint
+- `results/figures/mapped_layer_*.{py,csv}`, `performance_measured_v6.csv`, `power_4tone_v5.csv` — layer-level check, measured performance derivation, power
