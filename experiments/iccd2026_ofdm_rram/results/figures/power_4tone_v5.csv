@@ -1,0 +1,4 @@
+window,mean_power_mw
+steady-state 160-200ns (4-tone active),13.118
+40-200ns (post-enable avg),13.153
+"5-30ns (idle, DACs off, LOs running)",13.582

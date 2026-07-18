@@ -1,0 +1,88 @@
+simulator lang=spice
+.include "../models/ptm45/nmos_vtl_bsim4.inc"
+.include "../models/ptm45/pmos_vtl_bsim4.inc"
+simulator lang=spectre
+
+// AC diagnostic of the in-situ filter bank: real buffer drive impedance,
+// real Gilbert gate loading, single-ended drive at rfp like the TIA path.
+subckt diff_buffer (inp inn outp outn vb vdd)
+MTAIL (tail vb 0 0) NMOS_VTL w=1u l=90n
+MIP (outp inp tail 0) NMOS_VTL w=800n l=90n
+MIN (outn inn tail 0) NMOS_VTL w=800n l=90n
+RLP (vdd outp) resistor r=7k
+RLN (vdd outn) resistor r=7k
+COP (outp 0) capacitor c=80f
+CON (outn 0) capacitor c=80f
+ends diff_buffer
+
+subckt tuned_select (inp inn outp outn vcm)
+parameters lval=20n cval=20p cpl=500f rdamp=10k rout=100
+CCP (inp np) capacitor c=cpl
+CCN (inn nn) capacitor c=cpl
+CLP (np vcm) capacitor c=cval
+CLN (nn vcm) capacitor c=cval
+LLP (np vcm) inductor l=lval
+LLN (nn vcm) inductor l=lval
+RDP (np vcm) resistor r=rdamp
+RDN (nn vcm) resistor r=rdamp
+ROP (np outp) resistor r=rout
+RON (nn outn) resistor r=rout
+ends tuned_select
+
+subckt butterworth250 (inp inn outp outn vcm)
+L1p (inp n1p) inductor l=487.2n
+L1n (inn n1n) inductor l=487.2n
+C2p (n1p vcm) capacitor c=1.176p
+C2n (n1n vcm) capacitor c=1.176p
+L3p (n1p outp) inductor l=1.176u
+L3n (n1n outn) inductor l=1.176u
+C4p (outp vcm) capacitor c=487.2f
+C4n (outn vcm) capacitor c=487.2f
+RLPBW (outp vcm) resistor r=1k
+RLNBW (outn vcm) resistor r=1k
+ends butterworth250
+
+subckt gilbert_demod (rfp rfn lop lon outp outn vb vdd)
+MTAIL (tail vb 0 0) NMOS_VTL w=600n l=90n
+MRFP (xp rfp tail 0) NMOS_VTL w=600n l=90n
+MRFN (xn rfn tail 0) NMOS_VTL w=600n l=90n
+MSW1 (outp lop xp 0) NMOS_VTL w=600n l=90n
+MSW2 (outn lon xp 0) NMOS_VTL w=600n l=90n
+MSW3 (outp lon xn 0) NMOS_VTL w=600n l=90n
+MSW4 (outn lop xn 0) NMOS_VTL w=600n l=90n
+RLP (vdd outp) resistor r=5k
+RLN (vdd outn) resistor r=5k
+CINTP (outp 0) capacitor c=2p
+CINTN (outn 0) capacitor c=2p
+ends gilbert_demod
+
+parameters vdd=1.1
+VDD (vdd 0) vsource dc=vdd
+RVCMH (vdd vcm) resistor r=20k
+RVCML (vcm 0) resistor r=20k
+CVCM (vcm 0) capacitor c=10p
+RNB (vdd vbn) resistor r=10k
+MNREF (vbn vbn 0 0) NMOS_VTL w=600n l=90n
+VB65 (vb65 0) vsource dc=0.65
+// drive: AC source behind the same 100f/50k coupling seen from the TIA
+VSRC (src 0) vsource dc=0 mag=1
+CRFP (src rfp) capacitor c=100f
+RRFBIAS (rfp vcm) resistor r=50k
+RRFNBIAS (rfn vcm) resistor r=50k
+XBUF (rfp rfn bufp bufn vb65 vdd) diff_buffer
+XBW250 (bufp bufn bf250p bf250n vcm) butterworth250
+XBP500 (bufp bufn bf500p bf500n vcm) tuned_select lval=20n cval=4.841p
+XBP750 (bufp bufn bf750p bf750n vcm) tuned_select lval=20n cval=1.961p
+XBP1G (bufp bufn bf1gp bf1gn vcm) tuned_select lval=20n cval=1.059p
+VLOH (loh 0) vsource dc=1.1
+VLOL (lol 0) vsource dc=0
+XI250L (bf250p bf250n loh lol i250p i250n vbn vdd) gilbert_demod
+XQ250L (bf250p bf250n loh lol q250p q250n vbn vdd) gilbert_demod
+XI500L (bf500p bf500n loh lol i500p i500n vbn vdd) gilbert_demod
+XQ500L (bf500p bf500n loh lol q500p q500n vbn vdd) gilbert_demod
+XI750L (bf750p bf750n loh lol i750p i750n vbn vdd) gilbert_demod
+XQ750L (bf750p bf750n loh lol q750p q750n vbn vdd) gilbert_demod
+XI1gL (bf1gp bf1gn loh lol i1gp i1gn vbn vdd) gilbert_demod
+XQ1gL (bf1gp bf1gn loh lol q1gp q1gn vbn vdd) gilbert_demod
+ac ac start=50M stop=3G log=601
+save bufp bufn bf250p bf250n bf500p bf500n bf750p bf750n bf1gp bf1gn

@@ -1,0 +1,5 @@
+channel,target_frequency,parameter_value,measured_frequency,error_percent,run_path
+ch1,250MHz,cload=925.9f,249.50MHz,-0.200,results/filteronly_250_v5_ascii
+ch2,500MHz,cload=456.7f,498.92MHz,-0.216,results/filteronly_425_v5_ascii
+ch3,750MHz,cload=300.1f,748.86MHz,-0.152,results/filteronly_723_v5_ascii
+ch4,1000MHz,cload=221.8f,998.70MHz,-0.130,results/filteronly_1229_v5_ascii
