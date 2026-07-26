@@ -1,0 +1,5 @@
+carrier_row,BL0,BL1,BL2,BL3,encoding
+250,0,1,0,1,"1=Ron 1k,0=Roff 1M; PMOS selector w=270n gate=0 (1T1R)"
+500,0,1,1,0,"1=Ron 1k,0=Roff 1M; PMOS selector w=270n gate=0 (1T1R)"
+750,0,0,1,1,"1=Ron 1k,0=Roff 1M; PMOS selector w=270n gate=0 (1T1R)"
+1g,1,0,1,0,"1=Ron 1k,0=Roff 1M; PMOS selector w=270n gate=0 (1T1R)"

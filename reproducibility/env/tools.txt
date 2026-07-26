@@ -1,0 +1,15 @@
+Circuit simulation
+------------------
+Cadence Spectre 15.1.0.627 (CPU transient), nutascii output.
+Device models: PTM 45 nm BSIM4 predictive compact models
+  (nmos_vtl_bsim4.inc / pmos_vtl_bsim4.inc under models/ptm45/).
+  These are public predictive models and are NOT redistributed here;
+  place them under models/ptm45/ relative to the netlists before running.
+
+Spectre invocation template
+  spectre <netlist>.scs +escchars +log <name>.log -format nutascii -raw <name>_ascii
+
+Python
+------
+Python 3.11 (see requirements.txt). CPU is sufficient; the network study
+runs in minutes on CPU.

@@ -1,0 +1,7 @@
+# Python dependencies for the FiQ-CIM reproducibility scripts.
+numpy>=1.24
+matplotlib>=3.6
+pillow>=9.0
+# network study only (hw_aware_network_eval.py, train_resnet20_mnist.py):
+torch>=2.0
+torchvision>=0.15
