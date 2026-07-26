@@ -18,12 +18,12 @@ source, the command that produces it, and why it is drawn that way.
 
 ## Tables
 
-| Table | Content | Script / source |
-|-------|---------|-----------------|
-| 1 | Measurement setup and key parameters | `PARAMETERS.md` |
-| 2 | Measured four-channel chain summary (carrier error, filter gain, mixer gain, margins) | `analyze_gilbert.py`, `build_filteronly_matrix.py`, `oscillator_calibration.csv` |
-| 3 | Inference accuracy under the measured hardware model | `hw_aware_network_accuracy.csv` |
-| 4 | Performance comparison (throughput gain, energy efficiency) | `performance_measured_v6.csv`, `power_4tone_v5.csv` |
+| Table | Content | Where the data comes from |
+|-------|---------|---------------------------|
+| 1 | Measurement setup and key parameters | Read directly from the netlists in `netlists/`; all values are collected in `PARAMETERS.md`. No script is needed. |
+| 2 | Measured four-channel chain summary (carrier error, filter gain, mixer gain, margins) | `oscillator_calibration.csv`, `filteronly_leakage_matrix_v5.csv`, `gilbert_c1_metrics_v5.csv`, `gilbert_channel_margin_v5.csv` (produced by `analyze_gilbert.py` and `build_filteronly_matrix.py`) |
+| 3 | Per-network accuracy under the measured hardware model | `hw_aware_network_accuracy.csv` |
+| 4 | Performance comparison (throughput gain, energy efficiency) | Throughput and energy are computed by hand from the measured steady-state power in `power_4tone_v5.csv` and the operation count; the resulting values are collected in `performance_measured_v6.csv`. No dedicated figure script. |
 
 ## In-text numbers
 

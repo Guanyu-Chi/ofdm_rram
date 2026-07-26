@@ -4,7 +4,7 @@ This package reproduces every measured circuit result and network-evaluation
 result reported in the FiQ-CIM manuscript (frequency-multiplexed RRAM-CIM with
 orthogonal I/Q component encoding). It contains the frozen SPICE netlists, the
 parsing and figure-generation scripts, the result tables behind every figure,
-and the trained checkpoint used for the network study. Every figure and every
+and the trained model used for the network study. Every figure and every
 number in the paper is traceable to a named netlist and a named CSV
 (see `FIGURE_MAP.md`).
 
